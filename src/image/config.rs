@@ -301,10 +301,10 @@ where
     D: Deserializer<'de>,
 {
     // ensure stable order of keys in json document for comparison between expected and actual
-    #[cfg(test)]
+    //#[cfg(test)]
     let opt = Option::<BTreeMap<String, GoMapSerde>>::deserialize(deserializer)?;
-    #[cfg(not(test))]
-    let opt = Option::<HashMap<String, GoMapSerde>>::deserialize(deserializer)?;
+    //#[cfg(not(test))]
+    //let opt = Option::<HashMap<String, GoMapSerde>>::deserialize(deserializer)?;
 
     if let Some(data) = opt {
         let vec: Vec<String> = data.keys().cloned().collect();
@@ -324,10 +324,10 @@ where
     match target {
         Some(values) => {
             // ensure stable order of keys in json document for comparison between expected and actual
-            #[cfg(test)]
+            //#[cfg(test)]
             let map: BTreeMap<_, _> = values.iter().map(|v| (v, GoMapSerde {})).collect();
-            #[cfg(not(test))]
-            let map: HashMap<_, _> = values.iter().map(|v| (v, GoMapSerde {})).collect();
+            //#[cfg(not(test))]
+            //let map: HashMap<_, _> = values.iter().map(|v| (v, GoMapSerde {})).collect();
 
             let mut map_ser = serializer.serialize_map(Some(map.len()))?;
             for (key, value) in map {
